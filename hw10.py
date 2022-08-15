@@ -37,11 +37,11 @@ class FieldHandler:
         elif vvod.lstrip()[0:3].lower() == "add":
             name = vvod.split(" ")[1]
             phone = vvod.split(" ")[2]
-            record.add_data(name, phone)
+            adressbook.add_data(name, phone)
         elif "change" in vvod.lower():
             name = vvod.split(" ")[1]
             phone = vvod.split(" ")[2]
-            record.change_data(name, phone)
+            adressbook.change_data(name, phone)
         elif "phone" in vvod.lower():
             return adressbook.data[vvod.split(" ")[1]]
         elif "show all" in vvod.lower():
@@ -53,13 +53,23 @@ class FieldHandler:
 class AddressBook(UserDict, FieldHandler):
     
     def show_all(self):
-        if adressbook.data == {}:
+        if self.data == {}:
             my_string ="Your phone book is empty."
         else:
             my_string ="Display full phone book:\n"
             for key, value in adressbook.data.items():
                 my_string += ('{:<12} {:<15}\n'.format(key, ", ".join(value)))
         return my_string
+    
+    def change_data(self, name, phone):
+        ph_list = self.data.get(name, [])
+        ph_list[0] = phone
+        self.data[name] = ph_list 
+
+    def add_data(self ,name , phone, email = "" ):
+        ph_list = self.data.get(name, [])
+        ph_list.append(phone)
+        self.data[name] = ph_list
 
 class Record(FieldHandler):
     def __init__(self ,name = "" , phone_list = [], email = ""):
@@ -67,15 +77,7 @@ class Record(FieldHandler):
         self.phone_list = phone_list
         self.email = email
 
-    def change_data(self, name, phone):
-        ph_list = adressbook.data.get(name, [])
-        ph_list[0] = phone
-        adressbook.data[name] = ph_list 
 
-    def add_data(self ,name , phone, email = "" ):
-        ph_list = adressbook.data.get(name, [])
-        ph_list.append(phone)
-        adressbook.data[name] = ph_list
 
 
 @ welcome
