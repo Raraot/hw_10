@@ -23,7 +23,8 @@ class Record:
 
     def change_data(self, name, phone):
         ph_list = adressbook.data.get(name, [])
-        adressbook.data[name] = self.phone_list.append(phone) 
+        ph_list[0] = phone
+        adressbook.data[name] = ph_list 
 
     def add_data(self ,name , phone, email = "" ):
         ph_list = adressbook.data.get(name, [])
