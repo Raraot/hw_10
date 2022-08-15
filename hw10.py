@@ -4,7 +4,7 @@ from collections import UserDict
 # ДЕКОРАТОРИ
 def welcome(func):                                                        # декоратор оформлення привітання
     def inner(*args, **kwargs):
-        print("-"*32+"\nWelcome to Assistant Console Bot\n"+"-"*32)
+        print("-"*36+"\n  Welcome to Assistant Console Bot\n"+"-"*36)
         return func(*args, **kwargs)
     return inner
 
@@ -27,7 +27,7 @@ for reading please input:                   phone name         (example: phone V
             print("Invalid value. Try again.")
     return wrapper
 
-
+# КЛАСИ
 class FieldHandler:
 
     @ input_error
@@ -66,10 +66,20 @@ class AddressBook(UserDict, FieldHandler):
         ph_list[0] = phone
         self.data[name] = ph_list 
 
-    def add_data(self ,name , phone, email = "" ):
+    def add_data(self ,name , phone = "", email = "" ):
         ph_list = self.data.get(name, [])
         ph_list.append(phone)
         self.data[name] = ph_list
+
+class Name:
+    def __init__(self, name):
+        self.name = name
+
+        
+class Phone:
+    def __init__(self, phone = ""):
+        self.phone = phone
+
 
 class Record(FieldHandler):
     def __init__(self ,name = "" , phone_list = [], email = ""):
@@ -78,14 +88,12 @@ class Record(FieldHandler):
         self.email = email
 
 
-
-
 @ welcome
 def main():
     while True:
         vvod = input(": ")
         if vvod.strip().lower() in [".", "good bye", "close", "exit", "stop", "palyanytsya"]:
-            print("-"*32+"\nGood bye!\n"+"-"*32)
+            print("-"*36+"\n  Good bye!\n"+"-"*36)
             break
         else:
             print_me = fieldhandler.handler(vvod)
