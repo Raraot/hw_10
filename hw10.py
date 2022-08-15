@@ -71,12 +71,12 @@ class AddressBook(UserDict, FieldHandler):
         ph_list.append(phone)
         self.data[name] = ph_list
 
-class Name:
+class Name(FieldHandler):
     def __init__(self, name):
         self.name = name
 
-        
-class Phone:
+
+class Phone(FieldHandler):
     def __init__(self, phone = ""):
         self.phone = phone
 
