@@ -30,7 +30,6 @@ for reading please input:                   phone name         (example: phone V
 
 class FieldHandler:
 
-    
     @ input_error
     def handler(self, vvod):                                                        # функція обробки команд
         if vvod.lower() == "hello":
@@ -79,10 +78,6 @@ class Record(FieldHandler):
         adressbook.data[name] = ph_list
 
 
-
-
-
-
 @ welcome
 def main():
     while True:
@@ -95,7 +90,6 @@ def main():
             if print_me != None:                                                # необхідне прінтування 
                 print(print_me)
             continue
-
 
 if __name__ == '__main__':
     adressbook = AddressBook()
