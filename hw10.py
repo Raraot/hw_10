@@ -9,10 +9,10 @@ class AddressBook(UserDict):
         else:
             my_string ="Display full phone book:\n"
             for key, value in adressbook.data.items():
-                print(key)
-                print(value)
-                # my_string += ('{:<12} {:<15}\n'.format(key, value))
-        return 
+                # print(key)
+                # print(value)
+                my_string += ('{:<12} {:<15}\n'.format(key, ", ".join(value)))
+        return my_string
 
 
 class Record:
