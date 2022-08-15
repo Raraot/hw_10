@@ -1,38 +1,6 @@
 import functools
 from collections import UserDict
 
-class AddressBook(UserDict):
-    
-    def show_all(self):
-        if adressbook.data == {}:
-            my_string ="Your phone book is empty."
-        else:
-            my_string ="Display full phone book:\n"
-            for key, value in adressbook.data.items():
-                # print(key)
-                # print(value)
-                my_string += ('{:<12} {:<15}\n'.format(key, ", ".join(value)))
-        return my_string
-
-
-class Record:
-    def __init__(self ,name = "" , phone_list = [], email = ""):
-        self.name = name
-        self.phone_list = phone_list
-        self.email = email
-
-    def change_data(self, name, phone):
-        ph_list = adressbook.data.get(name, [])
-        ph_list[0] = phone
-        adressbook.data[name] = ph_list 
-
-    def add_data(self ,name , phone, email = "" ):
-        ph_list = adressbook.data.get(name, [])
-        ph_list.append(phone)
-        adressbook.data[name] = ph_list
-
-
-
 # ДЕКОРАТОРИ
 def welcome(func):                                                        # декоратор оформлення привітання
     def inner(*args, **kwargs):
@@ -61,6 +29,8 @@ for reading please input:                   phone name         (example: phone V
 
 
 class FieldHandler:
+
+    
     @ input_error
     def handler(self, vvod):                                                        # функція обробки команд
         if vvod.lower() == "hello":
@@ -79,6 +49,38 @@ class FieldHandler:
             return adressbook.show_all()
         else:
             return "Unknown command, please input correct data or command!"
+
+
+class AddressBook(UserDict, FieldHandler):
+    
+    def show_all(self):
+        if adressbook.data == {}:
+            my_string ="Your phone book is empty."
+        else:
+            my_string ="Display full phone book:\n"
+            for key, value in adressbook.data.items():
+                my_string += ('{:<12} {:<15}\n'.format(key, ", ".join(value)))
+        return my_string
+
+class Record(FieldHandler):
+    def __init__(self ,name = "" , phone_list = [], email = ""):
+        self.name = name
+        self.phone_list = phone_list
+        self.email = email
+
+    def change_data(self, name, phone):
+        ph_list = adressbook.data.get(name, [])
+        ph_list[0] = phone
+        adressbook.data[name] = ph_list 
+
+    def add_data(self ,name , phone, email = "" ):
+        ph_list = adressbook.data.get(name, [])
+        ph_list.append(phone)
+        adressbook.data[name] = ph_list
+
+
+
+
 
 
 @ welcome
